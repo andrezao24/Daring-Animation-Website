@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JESSE | Watch Now</title>
+    <link rel="icon" type="image/png" href="assets/DarLogo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style.css?v=1.0.3">
+</head>
+
+<body>
+
+    <div id="intro-loader">
+        <img src="assets/LogoDaring1.png" alt="Daring Logo" class="logo-img">
+    </div>
+
+    <nav id="navbar">
+        <a href="index.html">
+            <img src="assets/LogoDaring1.png" alt="Daring Logo" class="logo-img">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Jesse</a></li>
+            <li><a href="who-we-are.html">Who we are</a></li>
+            <li><a href="process.html">Our Process</a></li>
+            <li><a href="surpres.html">Brand Guidelines</a></li>
+            <li><a href="shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="daring-hero">
+        <div class="video-background">
+            <iframe
+                src="https://www.youtube.com/embed/vt9z-7PBYSM?autoplay=1&mute=1&loop=1&playlist=vt9z-7PBYSM&controls=0&modestbranding=1&rel=0"
+                frameborder="0" allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+
+        <div class="overlay-hover">
+            <div class="overlay-content">
+                <img src="assets/jesse-title-logo.png" alt="JESSE" class="movie-title-img">
+                <p class="synopsis">
+                    After the unexpected death of his grandfather, Jesse loses his way and takes refuge in alcohol and
+                    drugs, leaving him with only the guitar given by his grandfather 14 years ago.
+                </p>
+                <div class="buttons">
+                    <a href="https://www.youtube.com/watch?v=vt9z-7PBYSM" target="_blank" class="btn-case-study">
+                        <span class="icon">▶</span> Play on YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-shade"></div>
+    </header>
+
+    <main class="main-content">
+
+        <section class="content-row">
+            <h2 class="row-title">Trending Now: Characters</h2>
+            <div class="row-posters">
+                <div class="poster-card" onclick="openModal('jesse')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/jesse-card.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Jesse Reed</h3>
+                        <p>Protagonist</p>
+                    </div>
+                </div>
+                <div class="poster-card" onclick="openModal('joseph')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/joseph-card.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Joseph Reed</h3>
+                        <p>Grandfather</p>
+                    </div>
+                </div>
+                <div class="poster-card" onclick="openModal('john')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/john-card.jpg');"></div>
+                    <div class="card-details">
+                        <h3>John Richard</h3>
+                        <p>The Savior</p>
+                    </div>
+                </div>
+                <div class="poster-card" onclick="openModal('jermaine')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/jermaine-card.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Jermaine Rhoden</h3>
+                        <p>The Friend</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Explore the World: Locations</h2>
+            <div class="row-posters">
+                <div class="poster-card wide" onclick="openModal('ruin')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/bar-ruin.jpg');"></div>
+                    <div class="card-details">
+                        <h3>The Ruin</h3>
+                        <p>Underground Bar</p>
+                    </div>
+                </div>
+                <div class="poster-card wide" onclick="openModal('bedroom')">
+                    <div class="card-img-placeholder" style="background-image: url('assets/jesse-room.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Jesse's Bedroom</h3>
+                        <p>A Messy Refuge</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Production Phases</h2>
+            <div class="row-posters">
+                <a href="process.html#pre-production" class="poster-card wide">
+                    <div class="card-img-placeholder" style="background-image: url('assets/process1.jpg');"></div>
+                    <div class="card-details">
+                        <h3>I. Pre-Production</h3>
+                        <p>Click to See More</p>
+                    </div>
+                </a>
+                <a href="process.html#production" class="poster-card wide">
+                    <div class="card-img-placeholder" style="background-image: url('assets/process2.jpg');"></div>
+                    <div class="card-details">
+                        <h3>II. Production</h3>
+                        <p>Click to See More</p>
+                    </div>
+                </a>
+                <a href="process.html#post-production" class="poster-card wide">
+                    <div class="card-img-placeholder" style="background-image: url('assets/process3.jpg');"></div>
+                    <div class="card-details">
+                        <h3>III. Post-Production</h3>
+                        <p>Click to See More</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="jesse-page" id="jesse" aria-labelledby="jesse-title">
+            <!-- Processo criativo / Timeline -->
+            <div class="jesse-timeline" aria-labelledby="timeline-title">
+                <div class="timeline-track" role="list" aria-label="Fases de produção">
+                    <a href="process.html#pre-production" style="text-decoration: none;">
+                        <div class="timeline-item done" role="listitem">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-phase">I</div>
+                                <div class="timeline-name">Pre-Production </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="timeline-connector done" aria-hidden="true"></div>
+
+                    <a href="process.html#production" style="text-decoration: none;">
+                        <div class="timeline-item done" role="listitem">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-phase">II</div>
+                                <div class="timeline-name">Production</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="timeline-connector active" aria-hidden="true"></div>
+
+                    <a href="process.html#post-production" style="text-decoration: none;">
+                        <div class="timeline-item active" role="listitem" href="process.html#post-production">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-phase">III</div>
+                                <div class="timeline-name">Post-Production</div>
+
+                            </div>
+                        </div>
+                    </a>
+                    <div class="timeline-connector active" aria-hidden="true"></div>
+                    <div class="timeline-item" role="listitem" aria-label="Fase futura: Festival Run">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">IV</div>
+                            <div class="timeline-name">Festival Run</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Go Shopping!</h2>
+            <div class="row-posters">
+                <a href="shop.html#jesseproducts" class="poster-card wide">
+                    <div class="card-img-placeholder" style="background-image: url('assets/jesse-hat.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Jesse Originals</h3>
+                        <p>See Now</p>
+                    </div>
+                </a>
+                <a href="shop.html#daringproducts" class="poster-card wide">
+                    <div class="card-img-placeholder" style="background-image: url('assets/daring-hoodie.jpg');"></div>
+                    <div class="card-details">
+                        <h3>Daring Animation Collection</h3>
+                        <p>See Now</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-row festival-circuit-section">
+            <h2 class="row-title">Festival Circuit: Road to the Oscars</h2>
+
+            <div id="next-festival-banner" class="next-festival-banner">
+                <div class="banner-info">
+                    <h3>Next Deadline</h3>
+                    <span id="next-fest-name">Calculating...</span>
+                </div>
+                <div class="banner-timer">
+                    <p id="next-fest-timer" class="countdown-timer">00d 00h 00m 00s</p>
+                </div>
+            </div>
+
+            <div class="row-posters" id="festival-container">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="daring-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="index.html">Jesse</a></li>
+                        <li><a href="who-we-are.html">Who we are</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="process.html">Our Process</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="https://www.instagram.com/daringanimation/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@daringanimation" target="_blank">YouTube</a></li>
+                        <li><a href="https://www.tiktok.com/@daringanimation" target="_blank">TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="https://www.ua.pt/" target="_blank">Universidade de Aveiro</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Daring Animation. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="character-modal" class="modal">
+        <button class="lightbox-nav prev" onclick="navigateCharacter(-1)">&#10094;</button>
+        <button class="lightbox-nav next" onclick="navigateCharacter(1)">&#10095;</button>
+
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Character">
+                </div>
+                <div class="modal-text">
+                    <h2 id="modal-name">Name</h2>
+                    <h4 id="modal-role" class="modal-role">Role</h4>
+                    <p id="modal-bio">Bio</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=1.0.3"></script>
+
+</body>
+
+</html>

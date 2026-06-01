@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | DARING ANIMATION</title>
+    <link rel="icon" type="image/png" href="assets/DarLogo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="style.css?v=1.0.3">
+</head>
+
+<body>
+
+    <nav id="navbar" class="scrolled">
+        <a href="index.html">
+            <img src="assets/LogoDaring1.png" alt="Daring Logo" class="logo-img">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Jesse</a></li>
+            <li><a href="who-we-are.html">Who we are</a></li>
+            <li><a href="process.html">Our Process</a></li>
+            <li><a href="surpres.html">Brand Guidelines</a></li>
+            <li><a href="shop.html" class="active">Shop</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="shop-header">
+            <h1>Official Merchandise</h1>
+            <p>Explore our exclusive collection of Daring Animation and Jesse-themed products.</p>
+        </header>
+
+        <section class="shop-controls">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="filterShop()">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCategory('all', this)">Todos</button>
+                <button class="filter-btn" onclick="filterCategory('jesse', this)">Jesse</button>
+                <button class="filter-btn" onclick="filterCategory('daring', this)">Daring</button>
+            </div>
+        </section>
+
+        <section class="shop-section">
+            <h2 id="jesseproducts" class="section-title">Jesse Originals</h2>
+
+            <h3>Stickers & Pins</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/jesse-sticker.jpg" alt="Stickers"
+                        onclick="openLightbox(this)">
+                    <h3>Stickers</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-smiley-sticker.jpg" alt="Smiley Stickers"
+                        onclick="openLightbox(this)">
+                    <h3>Smiley Stickers</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-pin.jpg" alt="Pins" onclick="openLightbox(this)">
+                    <h3>Pins</h3>
+                </div>
+            </div>
+
+            <h3>Wearables</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/jesse-hat.jpg" alt="Hat" onclick="openLightbox(this)">
+                    <h3>Hat</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-hoodie.jpg" alt="Jesse Hoodie"
+                        onclick="openLightbox(this)">
+                    <h3>Hoodie</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-casaco.jpg" alt="Jesse Jacket"
+                        onclick="openLightbox(this)">
+                    <h3>Jesse Jacket</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-jermaine-casaco.jpg" alt="Jermaine Jacket"
+                        onclick="openLightbox(this)">
+                    <h3>Jermaine Jacket</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-john-casaco.jpg" alt="John Jacket"
+                        onclick="openLightbox(this)">
+                    <h3>John Jacket</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-meias.jpg" alt="Jesse Socks"
+                        onclick="openLightbox(this)">
+                    <h3>Socks</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-tshirt-flu.jpg" alt="Mirror T-shirt"
+                        onclick="openLightbox(this)">
+                    <h3>Mirror T-shirt</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-tshirt.jpg" alt="T-shirt" onclick="openLightbox(this)">
+                    <h3>T-shirt</h3>
+                </div>
+            </div>
+
+            <h3>Accessories</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/jesse-colar.jpg" alt="Jesse Necklace"
+                        onclick="openLightbox(this)">
+                    <h3>Jesse Necklace</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-anel.jpg" alt="Jesse Ring"
+                        onclick="openLightbox(this)">
+                    <h3>Jesse Ring</h3>
+                </div>
+            </div>
+
+            <h3>Music Apparels</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/jesse-pick.jpg" alt="Guitar Pick"
+                        onclick="openLightbox(this)">
+                    <h3>Guitar Pick</h3>
+                </div>
+                <div class="product-card"><img src="assets/jesse-vinyl.jpg" alt="Jesse Vinyl"
+                        onclick="openLightbox(this)">
+                    <h3>Soundtrack Vinyl</h3>
+                </div>
+            </div>
+
+            <h3>Action Figures</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/young-af-jesse.jpg" alt="Young Jesse Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Young Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/bad-af-jesse.jpg" alt="Bad Jesse Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Bad Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/downfall-af-jesse.jpg" alt="Downfall Jesse Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Downfall Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/jermaine-af.jpg" alt="Jermaine Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Jermaine</h3>
+                </div>
+                <div class="product-card"><img src="assets/joseph-af.jpg" alt="Joseph Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Joseph</h3>
+                </div>
+                <div class="product-card"><img src="assets/john-af.jpg" alt="John Action Figure"
+                        onclick="openLightbox(this)">
+                    <h3>John</h3>
+                </div>
+            </div>
+
+            <h3>Funko Partnership</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/young-f-jesse.jpg" alt="Young Jesse Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x Young Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/bad-f-jesse.jpg" alt="Bad Jesse Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x Bad Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/downfall-f-jesse.jpg" alt="Downfall Jesse Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x Downfall Jesse</h3>
+                </div>
+                <div class="product-card"><img src="assets/jermaine-f.jpg" alt="Jermaine Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x Jermaine</h3>
+                </div>
+                <div class="product-card"><img src="assets/john-f.jpg" alt="John Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x John</h3>
+                </div>
+                <div class="product-card"><img src="assets/joseph-f.jpg" alt="Joseph Funko Figure"
+                        onclick="openLightbox(this)">
+                    <h3>Funko x Joseph</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-section">
+            <h2 id="daringproducts" class="section-title">Daring Animation Collection</h2>
+
+            <h3>Wearables & Accessories</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/daring-hoodie.jpg" alt="Daring Hoodie"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Hoodie</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-min-hoodie.jpg" alt="Daring Minimalistic Hoodie"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Minimalistic Hoodie</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-min-hoodie-inv.jpg"
+                        alt="Daring Minimalistic Hoodie Inverted" onclick="openLightbox(this)">
+                    <h3>Daring Minimalistic Hoodie Inverted</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-hat.jpg" alt="Daring Cap"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Cap</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-min-hat.jpg" alt="Daring Minimalistic Cap"
+                        onclick="openLightbox(this)">
+                    <h3>Minimalistic Cap</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-tote.jpg" alt="Daring Tote"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Tote</h3>
+                </div>
+            </div>
+
+            <h3>Stationery</h3>
+            <div class="product-grid">
+                <div class="product-card"><img src="assets/daring-pen.jpg" alt="Daring Pen"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Pen</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-pencil.jpg" alt="Daring Pencil"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Pencil</h3>
+                </div>
+                <div class="product-card"><img src="assets/daring-notebook.jpg" alt="Daring Notebook"
+                        onclick="openLightbox(this)">
+                    <h3>Daring Notebook</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="lightbox-modal" class="modal">
+        <span class="close-btn"
+            onclick="document.getElementById('lightbox-modal').classList.remove('show')">&times;</span>
+        <button class="lightbox-nav prev" onclick="navigate(-1)">&#10094;</button>
+        <img class="modal-content" id="lightbox-img" src="" alt="Lightbox image">
+        <button class="lightbox-nav next" onclick="navigate(1)">&#10095;</button>
+    </div>
+
+    <footer class="daring-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="index.html">Jesse</a></li>
+                        <li><a href="who-we-are.html">Who we are</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="process.html">Our Process</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="https://www.instagram.com/daringanimation/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@daringanimation" target="_blank">YouTube</a></li>
+                        <li><a href="https://www.tiktok.com/@daringanimation" target="_blank">TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <ul>
+                        <li><a href="https://www.ua.pt/" target="_blank">Universidade de Aveiro</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Daring Animation. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js?v=1.0.3"></script>
+</body>
+
+</html>
