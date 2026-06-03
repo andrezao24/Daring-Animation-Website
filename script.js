@@ -62,40 +62,91 @@ const characterData = {
 };
 
 const festivalData = [
-    { name: "Cinanima", location: "Espinho, Portugal", deadline: "2026-06-21T23:59:59", url: "https://www.cinanima.pt/", img: "assets/fest-cinanima.jpg" },
-    { name: "BIAF", location: "Bucheon, South Korea", deadline: "2026-06-30T23:59:59", url: "https://www.biaf.or.kr/", img: "assets/fest-biaf.jpg" },
-    { name: "Monstra", location: "Lisbon, Portugal", deadline: "2026-09-01T23:59:59", url: "https://monstrafestival.com/", img: "assets/fest-monstra.jpg" },
-    { name: "ITFS Stuttgart", location: "Stuttgart, Germany", deadline: "2026-11-01T23:59:59", url: "https://www.itfs.de/", img: "assets/fest-itfs.jpg" },
-    { name: "Animafest", location: "Zagreb, Croatia", deadline: "2027-02-01T23:59:59", url: "http://www.animafest.hr/", img: "assets/fest-animafest.jpg" },
-    { name: "Annecy Festival", location: "Annecy, France", deadline: "2027-02-15T23:59:59", url: "https://www.annecy.org/", img: "assets/fest-annecy.jpg" },
-    { name: "Student Academy Awards", location: "TBD", deadline: "2027-03-01T23:59:59", url: "https://www.oscars.org/saa", img: "assets/fest-saa.jpg", gold: true },
-    { name: "Curtas", location: "Vila do Conde, Portugal", deadline: "2027-04-30T23:59:59", url: "https://www.curtas.pt/", img: "assets/fest-curtas.jpg" },
-    { name: "Oscars", location: "Los Angeles, USA", deadline: "2027-10-01T23:59:59", url: "https://www.oscars.org/", img: "assets/fest-oscars.jpg", gold: true }
+    {
+        name: "Cinanima",
+        location: "Espinho, Portugal",
+        deadline: "2026-06-21T23:59:59",
+        url: "https://www.cinanima.pt/",
+        img: "assets/fest-cinanima.jpg"
+    },
+    {
+        name: "BIAF",
+        location: "Bucheon, South Korea",
+        deadline: "2026-06-30T23:59:59",
+        url: "https://www.biaf.or.kr/",
+        img: "assets/fest-biaf.jpg"
+    },
+    {
+        name: "Monstra",
+        location: "Lisbon, Portugal",
+        deadline: "2026-09-01T23:59:59",
+        url: "https://monstrafestival.com/",
+        img: "assets/fest-monstra.jpg"
+    },
+    {
+        name: "ITFS Stuttgart",
+        location: "Stuttgart, Germany",
+        deadline: "2026-11-01T23:59:59",
+        url: "https://www.itfs.de/",
+        img: "assets/fest-itfs.jpg"
+    },
+    {
+        name: "Animafest",
+        location: "Zagreb, Croatia",
+        deadline: "2027-02-01T23:59:59",
+        url: "http://www.animafest.hr/",
+        img: "assets/fest-animafest.jpg"
+    },
+    {
+        name: "Annecy Festival",
+        location: "Annecy, France",
+        deadline: "2027-02-15T23:59:59",
+        url: "https://www.annecy.org/",
+        img: "assets/fest-annecy.jpg"
+    },
+    {
+        name: "Student Academy Awards",
+        location: "TBD",
+        deadline: "2027-03-01T23:59:59",
+        url: "https://www.oscars.org/saa",
+        img: "assets/fest-saa.jpg",
+        gold: true
+
+    },
+    {
+        name: "Curtas",
+        location: "Vila do Conde, Portugal",
+        deadline: "2027-04-30T23:59:59",
+        url: "https://www.curtas.pt/",
+        img: "assets/fest-curtas.jpg"
+    },
+    {
+        name: "Oscars",
+        location: "Los Angeles, USA",
+        deadline: "2027-10-01T23:59:59",
+        url: "https://www.oscars.org/",
+        img: "assets/fest-oscars.jpg",
+        gold: true
+    }
 ];
 
+// DOMContentLoaded - corre apenas após o carregamento do HTML para evitar erros de elementos não encontrados
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('intro-loader');
 
+    // Verifica se a intro já foi reproduzida nesta sessão
     if (sessionStorage.getItem('daring_intro_played')) {
-        if (loader) loader.style.display = 'none';
+        if (loader) loader.style.display = 'none'; // Se sim, Esconde o loader imediatamente
     } else {
         sessionStorage.setItem('daring_intro_played', 'true');
         setTimeout(() => {
             if (loader) loader.remove();
-        }, 4000);
+        }, 4000); // Se não, remove o loader após 4 segundos
     }
 
     const bgVideo = document.getElementById('bg-video');
     const volumeToggle = document.getElementById('volume-toggle');
     const volumeIcon = document.getElementById('volume-icon');
-
-    if (volumeToggle && bgVideo && volumeIcon) {
-        volumeToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            bgVideo.muted = !bgVideo.muted;
-            volumeIcon.textContent = bgVideo.muted ? '🔇' : '🔊';
-        });
-    }
 
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -104,25 +155,37 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+    }); // efeito de scroll - barra vermelha no topo
 
     const modal = document.getElementById('character-modal');
-    const closeBtn = document.querySelector('.close-btn');
+    const closeBtn = document.getElementById('close-modal');
 
     if (closeBtn && modal) {
         closeBtn.addEventListener('click', () => modal.classList.remove('show'));
         window.addEventListener('click', (e) => {
             if (e.target === modal) modal.classList.remove('show');
         });
-    }
+    } // fechar o card ao clicar fora ou no X
 
     const festivalContainer = document.getElementById('festival-container');
-    if (festivalContainer) {
+    if (festivalContainer) { // verifica se existe antes de tentar renderizar os cartões
         const renderCards = () => {
+            let allCards = '';
+
             festivalData.forEach((fest, index) => {
-                const goldClass = fest.gold ? 'gold-card' : '';
-                const oscarClass = fest.name === 'Oscars' ? 'ultimate-oscar' : '';
-                const cardHTML = `
+                let goldClass = '';
+                let oscarClass = '';
+
+                if (fest.gold) {
+                    goldClass = 'gold-card';
+                }
+
+                if (fest.name === 'Oscars') {
+                    oscarClass = 'ultimate-oscar';
+                }
+
+                //acumula o HTML de cada cartão numa string para
+                allCards += `
                     <a href="${fest.url}" target="_blank" class="poster-card festival-card wide ${goldClass} ${oscarClass}" draggable="false">
                         <div class="card-img-placeholder" style="background-image: url('${fest.img}');"></div>
                         <div class="card-details">
@@ -131,11 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </a>
                 `;
-                festivalContainer.insertAdjacentHTML('beforeend', cardHTML);
             });
+
+            festivalContainer.innerHTML = allCards + allCards;
         };
 
-        renderCards();
         renderCards();
 
         let isHovering = false;
@@ -147,13 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (festivalContainer.scrollLeft <= 0) {
                 festivalContainer.scrollLeft += festivalContainer.scrollWidth / 2;
             }
-        }
+        } // cria um efeito de scroll infinito
 
         festivalContainer.addEventListener('wheel', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // previne o scroll vertical 
             festivalContainer.scrollLeft += e.deltaY;
             checkScrollLimits();
-        });
+        }); // scroll carrossel com a roda do mouse
 
         festivalContainer.addEventListener('mouseenter', () => isHovering = true);
         festivalContainer.addEventListener('mouseleave', () => isHovering = false);
@@ -163,19 +226,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 festivalContainer.scrollLeft += autoScrollSpeed;
                 checkScrollLimits();
             }
-            requestAnimationFrame(autoScrollFestivals);
+            requestAnimationFrame(autoScrollFestivals); // chama a função no próximo frame para criar um loop suave
         }
+
         autoScrollFestivals();
 
         setInterval(() => {
-            const now = new Date().getTime();
+            const now = new Date().getTime(); // pega o timestamp atual
             let futureFestivals = [];
 
             festivalData.forEach((fest, index) => {
                 const timerElements = document.querySelectorAll(`.timer-ref-${index}`);
                 if (timerElements.length === 0) return;
 
-                const targetDate = new Date(fest.deadline).getTime();
+                const targetDate = new Date(fest.deadline).getTime(); // converte a data de deadline em timestamp
                 const distance = targetDate - now;
 
                 if (distance > 0) {
@@ -183,25 +247,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (distance < 0) {
-                    timerElements.forEach(el => {
-                        el.textContent = "Submission Closed";
-                        el.style.color = "#808080";
+                    timerElements.forEach(fest => {
+                        fest.textContent = "Submission Closed";
+                        fest.style.color = "#808080";
                     });
                     return;
-                }
+                } // se a data já passou, mostra "Submission Closed" e para de calcular
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                timerElements.forEach(el => {
-                    el.textContent = `Closes in: ${days}d ${hours}h`;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24)); // calcula os dias restantes
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // calcula as horas restantes
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); // calcula os minutos restantes
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000); // calcula os segundos restantes
+
+                timerElements.forEach(fest => {
+                    fest.textContent = `Closes in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
                 });
             });
 
-            const nextBanner = document.getElementById('next-festival-banner');
+            const nextBanner = document.getElementById('next-festival-banner'); // banner que mostra o próximo festival a fechar
             if (nextBanner) {
                 if (futureFestivals.length > 0) {
-                    futureFestivals.sort((a, b) => a.distance - b.distance);
-                    const nextFest = futureFestivals[0];
+                    futureFestivals.sort((a, b) => a.distance - b.distance); // ordena os festivais pelo tempo 
+
+                    const nextFest = futureFestivals[0]; //com base na ordenação, vai buscar o festival mais próximo de fechar [0]
 
                     const d = Math.floor(nextFest.distance / (1000 * 60 * 60 * 24));
                     const h = Math.floor((nextFest.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -210,14 +278,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     document.getElementById('next-fest-name').textContent = nextFest.name;
                     document.getElementById('next-fest-timer').textContent =
-                        `${d}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`;
+                        `${d}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`; // atualiza o banner com o nome do próximo festival e o tempo restante formatado 
 
                     nextBanner.style.display = "block";
                 } else {
                     nextBanner.style.display = "none";
                 }
             }
-        }, 1000);
+        }, 1000); // atualiza os timers a cada segundo
     }
 
     initComparisons();
@@ -227,16 +295,35 @@ let currentModalList = [];
 let currentModalIndex = 0;
 
 function openModal(characterId) {
-    const data = characterData[characterId];
+    const data = characterData[characterId]; // mostra os dados do personagem com base no ID passado para a função
     if (!data) return;
 
-    const allCards = Array.from(document.querySelectorAll('.poster-card[onclick^="openModal"]'));
-    if (allCards.length > 0) {
-        currentModalList = allCards.map(card => {
-            const match = card.getAttribute('onclick').match(/'([^']+)'|"([^"]+)"/);
-            return match ? (match[1] || match[2]) : null;
-        }).filter(id => id !== null);
+    const allPosterCards = document.getElementsByClassName('poster-card');
+    const validCardsArray = [];
 
+    for (let i = 0; i < allPosterCards.length; i++) { //
+        const card = allPosterCards[i];
+        const onclickValue = card.getAttribute('onclick'); // verifica se o cartão tem um atributo onclick, se sim = "openModal"
+
+        if (onclickValue && onclickValue.startsWith('openModal')) {
+
+            const match = onclickValue.match(/'([^']+)'|"([^"]+)"/); // expressão regular para extrair o ID do personagem
+
+            if (match) {
+                let characterIdFound = match[1];
+                if (!characterIdFound) {
+                    characterIdFound = match[2];
+                }
+                if (characterIdFound !== null) {
+                    validCardsArray.push(characterIdFound);
+                }
+            }
+        }
+    }
+
+    // atualiza as variáveis globa
+    if (validCardsArray.length > 0) {
+        currentModalList = validCardsArray;
         currentModalIndex = currentModalList.indexOf(characterId);
     }
 
@@ -246,7 +333,7 @@ function openModal(characterId) {
     document.getElementById('modal-role').textContent = data.role;
     document.getElementById('modal-bio').textContent = data.bio;
 
-    charModal.classList.add('show');
+    charModal.classList.add('show'); // mostra o modal e muda de block para show
 }
 
 function navigateCharacter(direction) {
@@ -266,9 +353,9 @@ function navigateCharacter(direction) {
         document.getElementById('modal-role').textContent = data.role;
         document.getElementById('modal-bio').textContent = data.bio;
     }
-}
+} // função para navegar entre os personagens, atualiza o conteúdo com base no índice atual da lista de personagens válida
 
-function initComparisons() {
+function initComparisons() { // função que cria o efeito de comparação entre as imagens
     const elements = document.getElementsByClassName("img-comp-overlay");
     for (let i = 0; i < elements.length; i++) {
         compareImages(elements[i]);
@@ -281,9 +368,9 @@ function initComparisons() {
 
         img.style.width = (w / 2) + "px";
 
-        slider = document.createElement("DIV");
-        slider.setAttribute("class", "img-comp-slider");
-        img.parentElement.insertBefore(slider, img);
+        slider = document.createElement("DIV"); // cria um novo elemento div para o slider
+        slider.setAttribute("class", "img-comp-slider"); // cria o slider e adiciona a classe para estilização
+        img.parentElement.insertBefore(slider, img); // insere o slider antes da imagem dentro do mesmo elemento pai
         slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
         slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
 
@@ -310,11 +397,20 @@ function initComparisons() {
         }
 
         function getCursorPos(e) {
-            const event = e.changedTouches ? e.changedTouches[0] : e;
+            let event;
+
+            if (e.changedTouches) {
+                event = e.changedTouches[0];
+            } else {
+                event = e;
+            }
+
             const a = img.getBoundingClientRect();
             let x = event.pageX - a.left;
             x = x - window.pageXOffset;
+
             return x;
+            // calcula a posição do cursor em relação à imagem, levando em conta o scroll da página, e retorna a coordenada x para ser usada na função de slide
         }
 
         function slide(x) {
@@ -328,7 +424,7 @@ function openLightbox(imgSrc) {
     const modal = document.getElementById('lightbox-modal');
     document.getElementById('lightbox-img').src = imgSrc;
     modal.classList.add('show');
-}
+} // abre o modal de visualização das imagens, recebe a fonte da imagem e atualiza o conteúdo antes de mostrá-lo
 
 let currentGallery = [];
 let currentIndex = 0;
@@ -336,19 +432,32 @@ const modal = document.getElementById('lightbox-modal');
 const modalImg = document.getElementById('lightbox-img');
 
 function openLightbox(imgElement) {
-    const gallery = imgElement.closest('.product-grid, .step-gallery, section') || imgElement.parentElement;
-    currentGallery = Array.from(gallery.querySelectorAll('img'));
+    let gallery = imgElement.closest('.product-grid');
+    if (!gallery) {
+        gallery = imgElement.closest('.step-gallery');
+    }
+    if (!gallery) {
+        gallery = imgElement.parentElement;
+    }
+
+    const allImages = gallery.getElementsByTagName('img');
+
+    currentGallery = [];
+    for (let i = 0; i < allImages.length; i++) {
+        currentGallery.push(allImages[i]);
+    }
+
     currentIndex = currentGallery.indexOf(imgElement);
     modalImg.src = imgElement.src;
     modal.classList.add('show');
-}
+} // função para abrir o lightbox
 
 function navigate(direction) {
     currentIndex += direction;
     if (currentIndex < 0) currentIndex = currentGallery.length - 1;
     if (currentIndex >= currentGallery.length) currentIndex = 0;
     modalImg.src = currentGallery[currentIndex].src;
-}
+} // função para navegar entre as imagens do lightbox
 
 document.addEventListener('keydown', (e) => {
     const lightboxModal = document.getElementById('lightbox-modal');
@@ -368,7 +477,7 @@ document.addEventListener('keydown', (e) => {
         if (lightboxModal && lightboxModal.classList.contains('show')) navigate(-1);
         if (characterModal && characterModal.classList.contains('show')) navigateCharacter(-1);
     }
-});
+}); // Esc para fechar modais, setas para navegar entre imagens
 
 function toggleColorGrading() {
     const before = document.getElementById('img-before');
@@ -377,31 +486,41 @@ function toggleColorGrading() {
 
     if (before.classList.contains('active')) {
         before.classList.remove('active');
-        after.classList.add('active');
-        label.textContent = "AFTER";
+        after.classList.add('active'); // altera a classe active entre as imagens para mostrar a imagem de depois
+        label.textContent = "AFTER"; // atualiza o texto do label para indicar qual imagem está ativa<
     } else {
         after.classList.remove('active');
         before.classList.add('active');
         label.textContent = "BEFORE";
     }
-}
+} // função para mudar entre as imagens de antes e depois
 
+// função para filtrar os produtos na loja com base no texto escrito no campo de busca
 function filterShop() {
     let input = document.getElementById('searchInput').value.toLowerCase();
-    let sections = document.querySelectorAll('.shop-section');
 
-    sections.forEach(section => {
+    let sections = document.getElementsByClassName('shop-section');
+
+    for (let i = 0; i < sections.length; i++) {
+        let section = sections[i];
         let sectionHasVisibleCards = false;
-        let grids = section.querySelectorAll('.product-grid');
 
-        grids.forEach(grid => {
-            let cards = grid.querySelectorAll('.product-card');
+        let grids = section.getElementsByClassName('product-grid');
+
+        for (let j = 0; j < grids.length; j++) {
+            let grid = grids[j];
+
+            let cards = grid.getElementsByClassName('product-card');
             let visibleCount = 0;
 
-            cards.forEach(card => {
-                let titleElement = card.querySelector('h3');
-                if (titleElement) {
+            for (let k = 0; k < cards.length; k++) {
+                let card = cards[k];
+                let titleElements = card.getElementsByTagName('h3');
+
+                if (titleElements.length > 0) {
+                    let titleElement = titleElements[0];
                     let title = titleElement.textContent.toLowerCase();
+
                     if (title.includes(input)) {
                         card.style.display = "block";
                         visibleCount++;
@@ -410,49 +529,86 @@ function filterShop() {
                         card.style.display = "none";
                     }
                 }
-            });
+            }
+            // verifica se o título do cartão inclui o texto do campo de pesquisa
+            // se sim, mostra o correspondete 
 
             let categoryTitle = grid.previousElementSibling;
             if (categoryTitle && categoryTitle.tagName === 'H3') {
-                categoryTitle.style.display = visibleCount > 0 ? "block" : "none";
+                if (visibleCount > 0) {
+                    categoryTitle.style.display = "block";
+                } else {
+                    categoryTitle.style.display = "none";
+                }
+            } // verifica se o título da categoria deve ou não ser exibido 
+
+            if (visibleCount > 0) {
+                grid.style.display = "grid";
+            } else {
+                grid.style.display = "none";
             }
-
-            grid.style.display = visibleCount > 0 ? "grid" : "none";
-        });
-
-        let sectionTitle = section.querySelector('h2');
-        if (sectionTitle) {
-            sectionTitle.style.display = sectionHasVisibleCards ? "block" : "none";
         }
-        section.style.display = sectionHasVisibleCards ? "block" : "none";
-    });
+
+        let sectionTitles = section.getElementsByTagName('h2');
+        if (sectionTitles.length > 0) {
+            let sectionTitle = sectionTitles[0];
+
+            if (sectionHasVisibleCards) {
+                sectionTitle.style.display = "block";
+            } else {
+                sectionTitle.style.display = "none";
+            }
+        }
+
+        if (sectionHasVisibleCards) {
+            section.style.display = "block";
+        } else {
+            section.style.display = "none";
+        } //
+    }
 }
 
+// função que os produtos na loja com base na categoria selecionada
 function filterCategory(cat, btnElement) {
-    const sections = document.querySelectorAll('.shop-section');
-    sections.forEach(sec => {
+    const sections = document.getElementsByClassName('shop-section');
+
+    for (let i = 0; i < sections.length; i++) {
+        const sec = sections[i];
+
         if (cat === 'all') {
             sec.style.display = "block";
         } else {
-            const h2Element = sec.querySelector('h2');
-            sec.style.display = h2Element && h2Element.id.includes(cat) ? "block" : "none";
-        }
-    });
+            const h2Elements = sec.getElementsByTagName('h2'); // verifica se o título da seção contém a categoria selecionada
 
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+            if (h2Elements.length > 0) {
+                const h2Element = h2Elements[0];
+                if (h2Element.id && h2Element.id.includes(cat)) {
+                    sec.style.display = "block";
+                } else {
+                    sec.style.display = "none";
+                }
+            } else {
+                sec.style.display = "none";
+            }
+        } // se a categoria for "all", mostra todas as seções, caso contrário, mostra a selecionada
+    }
+
+    const buttons = document.getElementsByClassName('filter-btn');
+    for (let j = 0; j < buttons.length; j++) {
+        const btn = buttons[j];
         btn.style.backgroundColor = 'transparent';
         btn.style.borderColor = '#444';
         btn.style.color = '#888';
-    });
+    }
 
     if (btnElement) {
         btnElement.style.backgroundColor = 'var(--accent-color)';
         btnElement.style.borderColor = 'var(--accent-color)';
         btnElement.style.color = '#fff';
-    }
+    } // atualiza o estilo dos botões para indicar qual categoria está ativa
 }
 
-
+// inicia os efeitos personalizado
 document.addEventListener('DOMContentLoaded', () => {
     initCustomCursor();
     initTiltEffect();
@@ -460,8 +616,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initCustomCursor() {
-    if (window.matchMedia('(max-width: 768px)').matches) return;
-
     const dot = document.createElement('div');
     const aura = document.createElement('div');
     dot.className = 'custom-cursor';
@@ -477,19 +631,21 @@ function initCustomCursor() {
         mouseY = e.clientY;
         dot.style.left = mouseX + 'px';
         dot.style.top = mouseY + 'px';
-    });
+    }); // move o cursor personalizado com base na posição do mouse
 
     function animateAura() {
         let distX = mouseX - auraX;
         let distY = mouseY - auraY;
-        auraX += distX * 0.15;
-        auraY += distY * 0.15;
+        auraX += distX * 0.10;
+        auraY += distY * 0.10; //delay na animiação da aura
         aura.style.left = auraX + 'px';
         aura.style.top = auraY + 'px';
-        requestAnimationFrame(animateAura);
+        requestAnimationFrame(animateAura); //chama a animação frame a frame
     }
-    animateAura();
 
+    animateAura(); // inicia a animação da aura
+
+    // define os elementos que vão interagir com o cursor
     const interactiveSelectors = 'a, button, .poster-card, .product-card, .filter-btn, .toggle-btn, .close-btn, img[onclick]';
 
     document.addEventListener('mouseover', (e) => {
@@ -497,23 +653,37 @@ function initCustomCursor() {
             dot.classList.add('hovered');
             aura.classList.add('hovered');
         }
-    });
+    }); // adiciona a classe "hovered"
 
     document.addEventListener('mouseout', (e) => {
         if (!e.target.closest(interactiveSelectors)) {
             dot.classList.remove('hovered');
             aura.classList.remove('hovered');
         }
-    });
+    }); // remove a classe "hovered" 
 }
 
+// função que cria o efeito de tilt nas imagens dos cartões
 function initTiltEffect() {
     if (window.matchMedia('(max-width: 768px)').matches) return;
 
-    const cards = document.querySelectorAll('.poster-card, .product-card');
+    const posterCards = document.getElementsByClassName('poster-card');
+    const productCards = document.getElementsByClassName('product-card');
+    const allCards = [];
 
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
+    for (let i = 0; i < posterCards.length; i++) {
+        allCards.push(posterCards[i]);
+    } // aplica o efeito de tilt
+
+    for (let j = 0; j < productCards.length; j++) {
+        allCards.push(productCards[j]);
+    } // acumula todos os cartões que devem ter o efeito de tilt em um único array
+
+    // adiciona os event listeners para o movimento do mouse
+    for (let k = 0; k < allCards.length; k++) {
+        const card = allCards[k];
+
+        card.addEventListener('mousemove', function (e) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -527,21 +697,24 @@ function initTiltEffect() {
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
         });
 
-        card.addEventListener('mouseleave', () => {
+        // reset quando o mouse sai do cartão
+        card.addEventListener('mouseleave', function () {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
         });
-    });
+    }
 }
 
 function initScrollReveal() {
+    //query selector que selecionam todos os elementos que devem ter o efeito de scroll reveal 
     const registry = document.querySelectorAll('.content-row, .process-step, .shop-section, .history-container, .values-grid');
 
     const observerOptions = {
         root: null,
         threshold: 0.15,
         rootMargin: "0px 0px -50px 0px"
-    };
+    }; 
 
+    // cria um  Observer API para observar quando os elementos entram na viewport e adiciona a classe "revealed" para ativar a animação
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -551,18 +724,21 @@ function initScrollReveal() {
         });
     }, observerOptions);
 
-    registry.forEach(el => {
-        el.classList.add('reveal-element');
-        observer.observe(el);
+    // adiciona a classe "reveal-element" a cada elemento
+    registry.forEach(fest => {
+        fest.classList.add('reveal-element');
+        observer.observe(fest);
     });
 }
 
+// função para criar o botão de scroll para o topo da página
 function initScrollTopButton() {
     const btn = document.createElement('button');
     btn.className = 'scroll-top-btn';
     btn.innerHTML = '↑';
     document.body.appendChild(btn);
 
+    // mostra o botão quando o utilizador dá scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > window.innerHeight * 0.5) {
             btn.classList.add('visible');
@@ -571,6 +747,7 @@ function initScrollTopButton() {
         }
     });
 
+    // adiciona um evento de click para o botão
     btn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
@@ -578,12 +755,14 @@ function initScrollTopButton() {
         });
     });
 }
+
 initScrollTopButton();
 
+// função para criar a barra de progresso de scroll no topo da página
 function initScrollProgress() {
     const bar = document.createElement('div');
     bar.className = 'scroll-progress-bar';
-    document.body.appendChild(bar);
+    document.body.appendChild(bar); // cria a barra e adiciona a classe 
 
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
@@ -592,11 +771,13 @@ function initScrollProgress() {
         bar.style.width = scrollPercent + '%';
     });
 }
+
 initScrollProgress();
 
+// função para alterar o título da página quando o utilizador muda de aba
 let originalTitle = document.title;
 window.addEventListener('blur', () => {
-    document.title = "Don't leave Jesse alone... 🎸";
+    document.title = "Don't leave Jesse alone...";
 });
 window.addEventListener('focus', () => {
     document.title = originalTitle;
@@ -606,6 +787,7 @@ window.addEventListener('focus', () => {
 let secretCode = "spike";
 let keyBuffer = "";
 
+// função para ativar um easter egg quando o utilizador digita a palavra "spike" no teclado
 window.addEventListener("keydown", (e) => {
     if (e.key.length === 1) {
         keyBuffer += e.key.toLowerCase();
@@ -615,9 +797,8 @@ window.addEventListener("keydown", (e) => {
         keyBuffer = keyBuffer.slice(1);
     }
 
+    // verifica se o buffer de teclas corresponde ao código secreto
     if (keyBuffer === secretCode) {
-        console.log("%c[SYSTEM] Easter Egg Desbloqueado: The Ruin is calling.", "color: #E32823; font-weight: bold;");
-
         document.body.style.transition = "filter 0.5s ease-in-out, transform 0.2s linear";
         document.body.style.filter = "sepia(100%) saturate(750%) hue-rotate(330deg) contrast(1.2) brightness(0.9)";
         document.body.style.transform = "rotate(-1.5deg) scale(1.02)";
@@ -631,6 +812,7 @@ window.addEventListener("keydown", (e) => {
     }
 });
 
+// função para ativar o menu hamburger em telemóvel
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
@@ -648,6 +830,8 @@ if (hamburger && navLinks) {
     });
 }
 
+
+// função para mostrar o loader cinematográfico apenas uma vez
 const cinemaLoader = document.getElementById('cinematic-loader');
 if (cinemaLoader) {
     if (sessionStorage.getItem('process_intro_played')) {
@@ -657,4 +841,3 @@ if (cinemaLoader) {
         setTimeout(() => cinemaLoader.remove(), 3200);
     }
 }
-

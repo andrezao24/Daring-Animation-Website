@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css?v=1.0.3">
+    <link rel="stylesheet" href="style.css?v=1.0.4">
 </head>
 
 <body>
@@ -146,7 +146,6 @@
         </section>
 
         <section class="jesse-page" id="jesse" aria-labelledby="jesse-title">
-            <!-- Processo criativo / Timeline -->
             <div class="jesse-timeline" aria-labelledby="timeline-title">
                 <div class="timeline-track" role="list" aria-label="Fases de produção">
                     <a href="process.html#pre-production" style="text-decoration: none;">
@@ -169,7 +168,8 @@
                             </div>
                         </div>
                     </a>
-                    <div class="timeline-connector active" aria-hidden="true"></div>
+
+                    <div class="timeline-connector done" aria-hidden="true"></div>
 
                     <a href="process.html#post-production" style="text-decoration: none;">
                         <div class="timeline-item active" role="listitem" href="process.html#post-production">
@@ -271,7 +271,7 @@
         <button class="lightbox-nav next" onclick="navigateCharacter(1)">&#10095;</button>
 
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" id="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-img-container">
                     <img id="modal-img" src="" alt="Character">
@@ -285,7 +285,7 @@
         </div>
     </div>
 
-    <script src="script.js?v=1.0.3"></script>
+    <script src="script.js?v=1.0.4"></script>
 
 </body>
 
