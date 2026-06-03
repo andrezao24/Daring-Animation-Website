@@ -1,0 +1,1 @@
+Daring Animation is a visually driven website concept created for an animation-focused brand, designed to showcase projects, storytelling, and digital experiences through an immersive and responsive interface.
